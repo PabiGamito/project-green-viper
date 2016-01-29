@@ -5,12 +5,8 @@
 # loop do
 # end
 
-#Get required dependencies
-require_relative 'okcoin_rest_client'
-require 'rufus-scheduler'
-require 'active_record'
-require 'pony'
-
+#Setup logger
+require 'logging'
 #Make logs directory unless it exists
 Dir.mkdir("logs") unless File.exists?("logs")
 
@@ -19,10 +15,14 @@ logs = Dir.entries("logs").sort.select { |file_name| /bot-log\w+.log/.match(file
 #Get next id of log file
 logs.count>0 ? next_id = /\d/.match(logs.last).to_s.to_i + 1 : next_id = 1
 #Creates new file to write log into
-File.new("logs/bot-log#{next_id}.log", "w")
+File.new("logs/bot-log#{next_id}.log", "w") 
+@logger = Logging.logger ("logs/bot-log#{next_id}.log")
 
-#Setup logger
-@logger = Logger.new ("logs/bot-log#{next_id}.log")
+#Get required dependencies
+require_relative 'okcoin_rest_client'
+require 'rufus-scheduler'
+require 'active_record'
+require 'pony'
 
 #Setup a scheduler
 class Rufus::Scheduler::Job
@@ -78,12 +78,11 @@ end
 #What to do on error in Schedualed Job
 def scheduler.on_error(job, err)
   p [ 'error in scheduled job', job.class, job.original, err.message ]
-  @logger.error "[ 'error in scheduled job', job.class, job.original, err.message ]"
+  @logger.error "error in scheduled job, #{job.class}, #{job.original}, #{err.message}"
 end
 
 #Require all needed files
 require_relative "live_processing.rb"
-require_relative "data_processor.rb"
 require_relative "data_point_updater.rb"
 
 #Setup Needed Variables
@@ -114,7 +113,8 @@ end
 
 scheduler.every '30s' do
   update_data_points
-  process_data
+  load 'data_processor.rb'
+  # @logger.info "running"
 end
 
 #Connect to schedualed task to run in loop forever.

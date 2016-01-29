@@ -1,19 +1,22 @@
 require_relative "indicators/stochastic.rb"
 
 def check_stop_loss_sell
-	if @buy <= @stop_loss_sell &&
+	begin
+	# @atr ||= 1
+	k_stochastic = stochastic(@raw_data, @stochastic_period, @stochastic_k, @stochastic_d)["k"].to_f
+	if @buy <= @stop_loss_sell-@atr*0.5 &&
 	k_stochastic > 20 &&
 	@btc!=0
 						
 		puts "Attempting to sell at #{@buy}".red
 		order = Okcoin.trade( "sell", @btc, @buy)
-		until order["result"]
-			order = Okcoin.trade( "sell", @btc, @buy)
-		end
 		check_order_completion( order["order_id"] )
 		# send_email("pablogamito@gmail.com", "Selling at #{@buy}")
 		@logger.info "Selling at #{@buy}"
 
+	end
+	rescue Exception => e
+		puts e
 	end
 end
 
@@ -21,8 +24,11 @@ end
 def check_order_completion(order_id)
 	#Gets the orderinfo and makes sure got data
 	order = Okcoin.order_info( order_id )
+	index = 0
 	until order["result"] #==true
 		order = Okcoin.order_info( order_id )
+		index += 1
+		break if index > 10
 	end
 
 	order_complete=false
@@ -31,11 +37,21 @@ def check_order_completion(order_id)
 	order_type ||= order["orders"].first["type"]
 
 	#Run this in loop until order is complete.
+	start_time=Time.now.to_i
 	until order_complete
 		#Updates order Data
+		if Time.now.to_i>start_time+2*60
+			Okcoin.cancel_order(order_id) rescue Okcoin.cancel_order(order_id)
+			order_complete=true
+			break
+		end
 		order = Okcoin.order_info( order_id )
 		until order["result"] #Makes sure data has been received
 			order = Okcoin.order_info( order_id )
+			if Time.now.to_i>start_time+2*60
+				Okcoin.cancel_order(order_id) rescue Okcoin.cancel_order(order_id)
+				break
+			end
 		end
 
 		# status: -1 = cancelled, 0 = unfilled, 1 = partially filled, 2 = fully filled, 4 = cancel request in process
@@ -46,6 +62,10 @@ def check_order_completion(order_id)
 			Okcoin.cancel_order(order_id) rescue Okcoin.cancel_order(order_id)
 			trade_success=false
 			until trade_success
+				if Time.now.to_i>start_time+2*60
+					Okcoin.cancel_order(order_id) rescue Okcoin.cancel_order(order_id)
+					break
+				end
 				#Get available balances
 				userinfo = Okcoin.userinfo
 				unless userinfo["result"]
