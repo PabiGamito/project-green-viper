@@ -28,6 +28,7 @@ require 'active_record'
 require 'pony'
 
 #Setup a scheduler
+#Prevent connection errors to database
 class Rufus::Scheduler::Job
 
   alias_method :old_do_call, :do_call
@@ -43,6 +44,8 @@ class Rufus::Scheduler::Job
   end
 
 end
+
+#Define the scheduler
 scheduler = Rufus::Scheduler.new
 
 @logger.debug 'Bot Started'
@@ -80,8 +83,7 @@ end
 
 #What to do on error in Schedualed Job
 def scheduler.on_error(job, err)
-  p [ 'error in scheduled job', job.class, job.original, err.message ]
-  @logger.error "error in scheduled job, #{job.class}, #{job.original}, #{err.message}"
+  @logger.error "error in scheduled job: #{job.class}: #{job.original}: #{err.message}: #{err.stacktrace}"
 end
 
 #Require all needed files

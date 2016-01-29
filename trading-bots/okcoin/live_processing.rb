@@ -16,7 +16,7 @@ def check_stop_loss_sell
 
 	end
 	rescue Exception => e
-		puts e
+		@logger.error "#{e.backtrace}: #{e.message} (#{e.class})"
 	end
 end
 

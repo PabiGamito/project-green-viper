@@ -23,7 +23,7 @@ require 'colorize'
 			@previous_date = @raw_data.last["date"].to_i
 
 			unless atr_val.nil?
-				puts @atr=atr_val
+				@atr=atr_val
 			end
 
 			# BUY
@@ -87,8 +87,7 @@ require 'colorize'
 					@stop_loss_buy=@raw_data.last["high"].to_f+@atr*0.1
 				end
 			rescue Exception => e
-				puts "Update stop-loss #{e}"
-				@logger.error "Update stop-loss #{e}"
+				@logger.error "#{e.backtrace}: #{e.message} (#{e.class})"
 			end
 
 			#Run stop-losses
@@ -99,7 +98,7 @@ require 'colorize'
 				# Stochastic: k>20
 				if last_close <= @stop_loss_sell &&
 					k_stochastic > 20 &&
-					@btc!=0
+					@btc >= 0.001
 					
 					puts "Attempting to sell at #{@buy}".red
 					order = Okcoin.trade( "sell", @btc, @buy)
@@ -121,7 +120,7 @@ require 'colorize'
 					20 < k_stochastic &&
 					k_stochastic < 80 &&
 					close_ema_val > open_ema_val &&
-					@cny!=0
+					@cny >= 0.001*@sell
 					
 					puts "Attempting to buy at #{@sell}".green
 					order = Okcoin.trade( "buy", @cny/@sell, @sell)
@@ -137,8 +136,7 @@ require 'colorize'
 
 				end
 			rescue Exception => e
-				puts "Proccessing stop-loss: #{e}"
-				@logger.error "Proccessing stop-loss: #{e}"
+				@logger.error "#{e.backtrace}: #{e.message} (#{e.class})"
 			end
 
 		end
