@@ -37,7 +37,7 @@ require 'colorize'
 				macd_val > 0 &&
 				@atr>1 &&
 				close_ema_val > open_ema_val &&
-				@cny>=0.001*@price
+				@cny>=0.001*@sell
 
 				puts "Attempting to buy at #{@sell}".green
 				order = Okcoin.trade( "buy", @cny/@sell, @sell)
@@ -61,7 +61,7 @@ require 'colorize'
 				k_stochastic < 80 &&
 				macd_val < last_macd_val &&
 				close_ema_val > open_ema_val &&
-				@btc != 0
+				@btc >= 0.001
 
 				puts "Attempting to sell at #{@buy}".red
 				order = Okcoin.trade( "sell", @btc, @buy)
