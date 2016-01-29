@@ -1,0 +1,129 @@
+#body{
+  background-color: rgb(242,242,242);
+}
+
+h1{
+  color: rgb(39,157,221);
+}
+.box{
+  border: 5px solid black;
+  padding: 2px;
+}
+
+nav{
+  border-radius: 0px !important;
+  margin-left: -1px;
+  margin-top: -1px;
+  margin-right: -1px;
+  /*margin: 0px !important;
+  padding: 0px !important;*/
+}
+
+/*PANEL*/
+
+.pn {
+  height: 250px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background: rgb(255,255,255);
+}
+.pn:hover {
+  box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);
+}
+.pn .pn-header {
+  background: rgb(242,242,242);
+  padding: 3px;
+  margin-bottom: 15px;
+}
+.pn h5 {
+  font-weight: 200;
+  margin-top: 10px;
+}
+.pn p {
+  margin-left: 5px;
+}
+
+/*NEWS BOX*/
+
+#news-box{
+  background-color: rgb(66,74,93);
+  padding: 10px;
+}
+#news-box .header{
+  background-color: rgb(39,157,221);
+  padding: 3px;
+  text-align: center;
+  color: white;
+}
+#news-box .update{
+  text-align: center;
+  padding: 3px;
+  border: 1px solid;
+}
+
+
+/* Dash Side */
+
+.ds {
+  background: #ffffff;
+  margin-right: 8px;
+}
+
+.ds h4 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ds h3 {
+  color: #ffffff;
+  font-size: 16px;
+  padding: 0 10px;
+  line-height: 60px;
+  height: 60px;
+  margin: 0;
+  background: #38afef;
+  text-align: center;
+}
+
+.ds i {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.ds .desc {
+  border-bottom: 1px solid #eaeaea;
+  display: inline-block;
+  padding: 15px 0;
+  width: 100%;
+}
+
+.ds .desc:hover {
+  background: #f2f2f2;
+}
+
+.ds .thumb {
+  width: 30px;
+  margin: 0 10px 0 20px;
+  display: block;
+  float: left;
+}
+
+.ds .details {
+  width: 170px;
+  float: left;
+}
+
+.ds > .desc p {
+  font-size: 11px;
+}
+
+.ds p > muted {
+  font-size: 9px;
+  text-transform: uppercase;
+  font-style: italic;
+  color: #666666
+}
+
+.ds a {
+  color: #68dff0;
+}
