@@ -1,4 +1,23 @@
-#TODO: Re-price based on bid-ask spread: Fill sell orders are going in faster than buy orders or viceversa place order or take order.
+require_relative "indicators/stochastic.rb"
+
+def check_stop_loss_sell
+	if @buy <= @stop_loss_sell &&
+	k_stochastic > 20 &&
+	@btc!=0
+						
+		puts "Attempting to sell at #{@buy}".red
+		order = Okcoin.trade( "sell", @btc, @buy)
+		until order["result"]
+			order = Okcoin.trade( "sell", @btc, @buy)
+		end
+		check_order_completion( order["order_id"] )
+		# send_email("pablogamito@gmail.com", "Selling at #{@buy}")
+		@logger.info "Selling at #{@buy}"
+
+	end
+end
+
+
 def check_order_completion(order_id)
 	#Gets the orderinfo and makes sure got data
 	order = Okcoin.order_info( order_id )

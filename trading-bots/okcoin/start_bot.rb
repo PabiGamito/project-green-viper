@@ -109,7 +109,7 @@ scheduler.every '1s' do
   @buy = @last_ticker["buy"].to_f
   @sell = @last_ticker["sell"].to_f
   @price =  @last_ticker["last"].to_f
-  load 'live_processing.rb'
+  check_stop_loss_sell
 end
 
 scheduler.every '30s' do
