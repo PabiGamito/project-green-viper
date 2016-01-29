@@ -10,17 +10,17 @@ require 'colorize'
 
 		if @raw_data!=nil && @previous_date!=@raw_data.last["date"].to_i
 			#Calculate all Variables
-			p last_close = @prices.last.to_f
-			p last_open = @raw_data.last["open"].to_f
-			p main_ema_val = @prices.last(@main_ema).ema.to_f
-			p short_ema_val = @prices.last(@short_ema).ema.to_f
-			p k_stochastic = stochastic(@raw_data, @stochastic_period, @stochastic_k, @stochastic_d)["k"].to_f
-			p macd_val = macd(@prices, @macd_short, @macd_long, 1).to_f
-			p last_macd_val = macd(@prices.first(@prices.count-1), @macd_short, @macd_long, 1).to_f
-			p atr_val = atr(@raw_data, @atr_ma).to_f
-			p close_ema_val = @prices.last(@close_ema).ema.to_f
-			p open_ema_val = @prices.last(@open_ema).ema.to_f
-			p @previous_date = @raw_data.last["date"].to_i
+			last_close = @prices.last.to_f
+			last_open = @raw_data.last["open"].to_f
+			main_ema_val = @prices.last(@main_ema).ema.to_f
+			short_ema_val = @prices.last(@short_ema).ema.to_f
+			k_stochastic = stochastic(@raw_data, @stochastic_period, @stochastic_k, @stochastic_d)["k"].to_f
+			macd_val = macd(@prices, @macd_short, @macd_long, 1).to_f
+			last_macd_val = macd(@prices.first(@prices.count-1), @macd_short, @macd_long, 1).to_f
+			atr_val = atr(@raw_data, @atr_ma).to_f
+			close_ema_val = @prices.last(@close_ema).ema.to_f
+			open_ema_val = @prices.last(@open_ema).ema.to_f
+			@previous_date = @raw_data.last["date"].to_i
 
 			unless atr_val.nil?
 				puts @atr=atr_val
@@ -142,10 +142,6 @@ require 'colorize'
 			end
 
 		end
-
-		puts @stop_loss_sell
-		puts @stop_loss_buy
-
 		puts "Data Processing Done"
 	end
 # end

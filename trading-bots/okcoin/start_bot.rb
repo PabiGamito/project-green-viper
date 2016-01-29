@@ -16,7 +16,10 @@ logs = Dir.entries("logs").sort.select { |file_name| /bot-log\w+.log/.match(file
 logs.count>0 ? next_id = /\d/.match(logs.last).to_s.to_i + 1 : next_id = 1
 #Creates new file to write log into
 File.new("logs/bot-log#{next_id}.log", "w") 
-@logger = Logging.logger ("logs/bot-log#{next_id}.log")
+@logger = Logging.logger['main_logger']
+@logger.add_appenders \
+    Logging.appenders.stdout,
+    Logging.appenders.file("logs/bot-log#{next_id}.log")
 
 #Get required dependencies
 require_relative 'okcoin_rest_client'

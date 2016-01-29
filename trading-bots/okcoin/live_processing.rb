@@ -4,9 +4,9 @@ def check_stop_loss_sell
 	begin
 	# @atr ||= 1
 	k_stochastic = stochastic(@raw_data, @stochastic_period, @stochastic_k, @stochastic_d)["k"].to_f
-	if @buy <= @stop_loss_sell-@atr*0.5 &&
+	if @buy <= @stop_loss_sell-@atr*0.8 &&
 	k_stochastic > 20 &&
-	@btc!=0
+	@btc >= 0.001
 						
 		puts "Attempting to sell at #{@buy}".red
 		order = Okcoin.trade( "sell", @btc, @buy)
