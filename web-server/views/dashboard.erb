@@ -169,46 +169,105 @@
                             </a>
                             <!-- END Widget -->
                         </div>
-                        <div class="col-sm-6">
-                            <!-- Widget -->
-                            <a href="page_comp_charts.html" class="widget widget-hover-effect1">
-                                <div class="widget-simple">
-                                    <div class="widget-icon pull-left themed-background animation-fadeIn">
-                                        <i class="gi gi-wallet"></i>
-                                    </div>
-                                    <div class="pull-right">
-                                        <!-- Jquery Sparkline (initialized in js/pages/index.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
-                                        <span id="mini-chart-sales"></span>
-                                    </div>
-                                    <h3 class="widget-content animation-pullDown visible-lg">
-                                        Latest <strong>Sales</strong>
-                                        <small>Per hour</small>
-                                    </h3>
+                    </div>
+                    <!-- END Mini Top Stats Row -->
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="widget">
+                                <div class="widget-extra text-center themed-background-dark-night">
+                                    <h3 class="widget-content-light"><i class="fa fa-arrow-up animation-floating"></i> Weekly <strong>Stats</strong></h3>
                                 </div>
-                            </a>
-                            <!-- END Widget -->
+                                <div class="widget-simple">
+                                    <div class="row text-center">
+                                        <div class="col-xs-4">
+                                            <a href="javascript:void(0)" class="widget-icon themed-background-spring">
+                                                <i class="gi gi-coins"></i>
+                                            </a>
+                                            <h3 class="remove-margin-bottom">+ <strong>10%</strong><br><small>Earnings</small></h3>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a href="javascript:void(0)" class="widget-icon themed-background-spring">
+                                                <i class="gi gi-thumbs_up"></i>
+                                            </a>
+                                            <h3 class="remove-margin-bottom">+ <strong>20%</strong><br><small>Sales</small></h3>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a href="javascript:void(0)" class="widget-icon themed-background-fire">
+                                                <i class="fa fa-ticket"></i>
+                                            </a>
+                                            <h3 class="remove-margin-bottom">- <strong>10%</strong><br><small>Tickets</small></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
                             <!-- Widget -->
-                            <a href="page_widgets_stats.html" class="widget widget-hover-effect1">
-                                <div class="widget-simple">
-                                    <div class="widget-icon pull-left themed-background animation-fadeIn">
-                                        <i class="gi gi-crown"></i>
-                                    </div>
-                                    <div class="pull-right">
-                                        <!-- Jquery Sparkline (initialized in js/pages/index.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
-                                        <span id="mini-chart-brand"></span>
-                                    </div>
-                                    <h3 class="widget-content animation-pullDown visible-lg">
-                                        Our <strong>Brand</strong>
-                                        <small>Popularity over time</small>
-                                    </h3>
+                            <div class="widget">
+                                <div class="widget-extra text-center themed-background-flatie">
+                                    <h3 class="widget-content-light"><i class="fa fa-chevron-up animation-floating"></i> Monthly <strong>Stats</strong></h3>
                                 </div>
-                            </a>
+                                <div class="widget-simple themed-background-dark-flatie">
+                                    <div class="row text-center">
+                                        <div class="col-xs-4">
+                                            <a href="javascript:void(0)" class="widget-icon themed-background-flatie">
+                                                <i class="gi gi-coins"></i>
+                                            </a>
+                                            <h3 class="widget-content-light remove-margin-bottom">+ <strong>10%</strong><br><small>Earnings</small></h3>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a href="javascript:void(0)" class="widget-icon themed-background-flatie">
+                                                <i class="gi gi-thumbs_up"></i>
+                                            </a>
+                                            <h3 class="widget-content-light remove-margin-bottom">+ <strong>20%</strong><br><small>Sales</small></h3>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a href="javascript:void(0)" class="widget-icon themed-background-night">
+                                                <i class="fa fa-ticket"></i>
+                                            </a>
+                                            <h3 class="widget-content-light remove-margin-bottom">- <strong>10%</strong><br><small>Tickets</small></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- END Widget -->
                         </div>
                     </div>
-                    <!-- END Mini Top Stats Row -->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <!-- Classic Chart Block -->
+                            <div class="block full">
+                                <!-- Classic Chart Title -->
+                                <div class="block-title">
+                                    <h2><strong>Classic</strong> Chart</h2>
+                                </div>
+                                <!-- END Classic Chart Title -->
+
+                                <!-- Classic Chart Content -->
+                                <!-- Flot Charts (initialized in js/pages/compCharts.js), for more examples you can check out http://www.flotcharts.org/ -->
+                                <div id="chart-classic" class="chart" style="padding: 0px; position: relative;"><canvas class="flot-base" width="653" height="360" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 653px; height: 360px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 22px; text-align: center;">Jan</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 76px; text-align: center;">Feb</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 131px; text-align: center;">Mar</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 187px; text-align: center;">Apr</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 241px; text-align: center;">May</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 299px; text-align: center;">Jun</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 356px; text-align: center;">Jul</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 408px; text-align: center;">Aug</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 463px; text-align: center;">Sep</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 520px; text-align: center;">Oct</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 574px; text-align: center;">Nov</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 54px; top: 345px; left: 630px; text-align: center;">Dec</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div class="flot-tick-label tickLabel" style="position: absolute; top: 332px; left: 19px; text-align: right;">0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 267px; left: 0px; text-align: right;">1000</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 202px; left: 0px; text-align: right;">2000</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 137px; left: 0px; text-align: right;">3000</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 72px; left: 0px; text-align: right;">4000</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 7px; left: 0px; text-align: right;">5000</div></div></div><canvas class="flot-overlay" width="653" height="360" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 653px; height: 360px;"></canvas><div class="legend"><div style="position: absolute; width: 58px; height: 30px; top: 24px; left: 45px; opacity: 0.85; background-color: rgb(255, 255, 255);"> </div><table style="position:absolute;top:24px;left:45px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(52,152,219);overflow:hidden"></div></div></td><td class="legendLabel">Earnings</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(51,51,51);overflow:hidden"></div></div></td><td class="legendLabel">Sales</td></tr></tbody></table></div></div>
+                                <!-- END Classic Chart Content -->
+                            </div>
+                            <!-- END Classic Chart Block -->
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- Pie Chart Block -->
+                            <div class="block full">
+                                <!-- Pie Chart Title -->
+                                <div class="block-title">
+                                    <h2><strong>Pie</strong> Chart</h2>
+                                </div>
+                                <!-- END Pie Title -->
+
+                                <!-- Pie Chart Content -->
+                                <div id="chart-pie" class="chart" style="padding: 0px; position: relative;"><canvas class="flot-base" width="653" height="360" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 653px; height: 360px;"></canvas><canvas class="flot-overlay" width="653" height="360" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 653px; height: 360px;"></canvas><div class="pieLabelBackground" style="position: absolute; width: 69px; height: 50px; top: 46px; left: 371px; opacity: 0.75; background-color: rgb(0, 0, 0);"></div><span class="pieLabel" id="pieLabel0" style="position: absolute; top: 46px; left: 371px;"><div class="chart-pie-label">Support<br>20%</div></span><div class="pieLabelBackground" style="position: absolute; width: 72px; height: 50px; top: 275px; left: 351.5px; opacity: 0.75; background-color: rgb(0, 0, 0);"></div><span class="pieLabel" id="pieLabel1" style="position: absolute; top: 275px; left: 351.5px;"><div class="chart-pie-label">Earnings<br>45%</div></span><div class="pieLabelBackground" style="position: absolute; width: 52px; height: 50px; top: 94px; left: 180.5px; opacity: 0.75; background-color: rgb(0, 0, 0);"></div><span class="pieLabel" id="pieLabel2" style="position: absolute; top: 94px; left: 180.5px;"><div class="chart-pie-label">Sales<br>35%</div></span></div>
+                                <!-- END Pie Chart Content -->
+                            </div>
+                            <!-- END Pie Chart Block -->
+                        </div>
+                    </div>
 
                     <!-- Widgets Row -->
                     <div class="row">
@@ -223,7 +282,7 @@
                                         </div>
                                     </div>
                                     <h3 class="widget-content-light">
-                                        Latest <strong>News</strong>
+                                        Latest <strong>Transactions</strong>
                                         <small><a href="page_ready_timeline.html"><strong>View all</strong></a></small>
                                     </h3>
                                 </div>
@@ -232,73 +291,19 @@
                                     <div class="timeline">
                                         <ul class="timeline-list">
                                             <li class="active">
-                                                <div class="timeline-icon"><i class="gi gi-airplane"></i></div>
-                                                <div class="timeline-time"><small>just now</small></div>
-                                                <div class="timeline-content">
-                                                    <p class="push-bit"><a href="page_ready_user_profile.html"><strong>Jordan Carter</strong></a></p>
-                                                    <p class="push-bit">The trip was an amazing and a life changing experience!!</p>
-                                                    <p class="push-bit"><a href="page_ready_article.html" class="btn btn-xs btn-primary"><i class="fa fa-file"></i> Read the article</a></p>
-                                                    <div class="row push">
-                                                        <div class="col-sm-6 col-md-4">
-                                                            <a href="img/placeholders/photos/photo1.jpg" data-toggle="lightbox-image">
-                                                                <img src="img/placeholders/photos/photo1.jpg" alt="image">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-4">
-                                                            <a href="img/placeholders/photos/photo22.jpg" data-toggle="lightbox-image">
-                                                                <img src="img/placeholders/photos/photo22.jpg" alt="image">
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="active">
-                                                <div class="timeline-icon themed-background-fire themed-border-fire"><i class="fa fa-file-text"></i></div>
+                                                <div class="timeline-icon"><i class="fa fa-arrow-right"></i></div>
                                                 <div class="timeline-time"><small>5 min ago</small></div>
                                                 <div class="timeline-content">
-                                                    <p class="push-bit"><a href="page_ready_user_profile.html"><strong>Administrator</strong></a></p>
-                                                    <strong>Free courses</strong> for all our customers at A1 Conference Room - 9:00 <strong>am</strong> tomorrow!
+                                                    <p class="push-bit"><a href="page_ready_user_profile.html"><strong>BTC/CNY</strong></a></p>
+                                                    <strong>Bought</strong> 0.34 BTC for 456CNY
                                                 </div>
                                             </li>
                                             <li class="active">
-                                                <div class="timeline-icon"><i class="gi gi-drink"></i></div>
-                                                <div class="timeline-time"><small>3 hours ago</small></div>
+                                                <div class="timeline-icon themed-background-fire themed-border-fire"><i class="fa fa-arrow-left"></i></div>
+                                                <div class="timeline-time"><small>5 min ago</small></div>
                                                 <div class="timeline-content">
-                                                    <p class="push-bit"><a href="page_ready_user_profile.html"><strong>Ella Winter</strong></a></p>
-                                                    <p class="push-bit"><strong>Happy Hour!</strong> Free drinks at <a href="javascript:void(0)">Cafe-Bar</a> all day long!</p>
-                                                    <div id="gmap-timeline" class="gmap"></div>
-                                                </div>
-                                            </li>
-                                            <li class="active">
-                                                <div class="timeline-icon"><i class="fa fa-cutlery"></i></div>
-                                                <div class="timeline-time"><small>yesterday</small></div>
-                                                <div class="timeline-content">
-                                                    <p class="push-bit"><a href="page_ready_user_profile.html"><strong>Patricia Woods</strong></a></p>
-                                                    <p class="push-bit">Today I had the lunch of my life! It was delicious!</p>
-                                                    <div class="row push">
-                                                        <div class="col-sm-6 col-md-4">
-                                                            <a href="img/placeholders/photos/photo23.jpg" data-toggle="lightbox-image">
-                                                                <img src="img/placeholders/photos/photo23.jpg" alt="image">
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="active">
-                                                <div class="timeline-icon themed-background-fire themed-border-fire"><i class="fa fa-smile-o"></i></div>
-                                                <div class="timeline-time"><small>2 days ago</small></div>
-                                                <div class="timeline-content">
-                                                    <p class="push-bit"><a href="page_ready_user_profile.html"><strong>Administrator</strong></a></p>
-                                                    To thank you all for your support we would like to let you know that you will receive free feature updates for life! You are awesome!
-                                                </div>
-                                            </li>
-                                            <li class="active">
-                                                <div class="timeline-icon"><i class="fa fa-pencil"></i></div>
-                                                <div class="timeline-time"><small>1 week ago</small></div>
-                                                <div class="timeline-content">
-                                                    <p class="push-bit"><a href="page_ready_user_profile.html"><strong>Nicole Ward</strong></a></p>
-                                                    <p class="push-bit">Consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate.</p>
-                                                    Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum.
+                                                    <p class="push-bit"><a href="page_ready_user_profile.html"><strong>BTC/CNY</strong></a></p>
+                                                    <strong>Sold</strong> 0.34 BTC for 456CNY
                                                 </div>
                                             </li>
                                             <li class="text-center">
@@ -356,137 +361,6 @@
                                 </div>
                             </div>
                             <!-- END Your Plan Widget -->
-
-                            <!-- Charts Widget -->
-                            <div class="widget">
-                                <div class="widget-advanced widget-advanced-alt">
-                                    <!-- Widget Header -->
-                                    <div class="widget-header text-center themed-background">
-                                        <h3 class="widget-content-light text-left pull-left animation-pullDown">
-                                            <strong>Sales</strong> &amp; <strong>Earnings</strong><br>
-                                            <small>Last Year</small>
-                                        </h3>
-                                        <!-- Flot Charts (initialized in js/pages/index.js), for more examples you can check out http://www.flotcharts.org/ -->
-                                        <div id="dash-widget-chart" class="chart"></div>
-                                    </div>
-                                    <!-- END Widget Header -->
-
-                                    <!-- Widget Main -->
-                                    <div class="widget-main">
-                                        <div class="row text-center">
-                                            <div class="col-xs-4">
-                                                <h3 class="animation-hatch"><strong>7.500</strong><br><small>Clients</small></h3>
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <h3 class="animation-hatch"><strong>10.970</strong><br><small>Sales</small></h3>
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <h3 class="animation-hatch">$<strong>31.230</strong><br><small>Earnings</small></h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- END Widget Main -->
-                                </div>
-                            </div>
-                            <!-- END Charts Widget -->
-
-                            <!-- Weather Widget -->
-                            <div class="widget">
-                                <div class="widget-advanced widget-advanced-alt">
-                                    <!-- Widget Header -->
-                                    <div class="widget-header text-left">
-                                        <!-- For best results use an image with at least 150 pixels in height (with the width relative to how big your widget will be!) - Here I'm using a 1200x150 pixels image -->
-                                        <img src="img/placeholders/headers/widget5_header.jpg" alt="background" class="widget-background animation-pulseSlow">
-                                        <h3 class="widget-content widget-content-image widget-content-light clearfix">
-                                            <span class="widget-icon pull-right">
-                                                <i class="fa fa-sun-o animation-pulse"></i>
-                                            </span>
-                                            Weather <strong>Station</strong><br>
-                                            <small><i class="fa fa-location-arrow"></i> The Mountain</small>
-                                        </h3>
-                                    </div>
-                                    <!-- END Widget Header -->
-
-                                    <!-- Widget Main -->
-                                    <div class="widget-main">
-                                        <div class="row text-center">
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong>10&deg;</strong> <small>C</small><br>
-                                                    <small>Sunny</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong>80</strong> <small>%</small><br>
-                                                    <small>Humidity</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong>60</strong> <small>km/h</small><br>
-                                                    <small>Wind</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-3">
-                                                <h3>
-                                                    <strong>5</strong> <small>km</small><br>
-                                                    <small>Visibility</small>
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- END Widget Main -->
-                                </div>
-                            </div>
-                            <!-- END Weather Widget-->
-
-                            <!-- Advanced Gallery Widget -->
-                            <div class="widget">
-                                <div class="widget-advanced">
-                                    <!-- Widget Header -->
-                                    <div class="widget-header text-center themed-background-dark">
-                                        <h3 class="widget-content-light clearfix">
-                                            Awesome <strong>Gallery</strong><br>
-                                            <small>4 Photos</small>
-                                        </h3>
-                                    </div>
-                                    <!-- END Widget Header -->
-
-                                    <!-- Widget Main -->
-                                    <div class="widget-main">
-                                        <a href="page_comp_gallery.html" class="widget-image-container">
-                                            <span class="widget-icon themed-background"><i class="gi gi-picture"></i></span>
-                                        </a>
-                                        <div class="gallery gallery-widget" data-toggle="lightbox-gallery">
-                                            <div class="row">
-                                                <div class="col-xs-6 col-sm-3">
-                                                    <a href="img/placeholders/photos/photo15.jpg" class="gallery-link" title="Image Info">
-                                                        <img src="img/placeholders/photos/photo15.jpg" alt="image">
-                                                    </a>
-                                                </div>
-                                                <div class="col-xs-6 col-sm-3">
-                                                    <a href="img/placeholders/photos/photo5.jpg" class="gallery-link" title="Image Info">
-                                                        <img src="img/placeholders/photos/photo5.jpg" alt="image">
-                                                    </a>
-                                                </div>
-                                                <div class="col-xs-6 col-sm-3">
-                                                    <a href="img/placeholders/photos/photo6.jpg" class="gallery-link" title="Image Info">
-                                                        <img src="img/placeholders/photos/photo6.jpg" alt="image">
-                                                    </a>
-                                                </div>
-                                                <div class="col-xs-6 col-sm-3">
-                                                    <a href="img/placeholders/photos/photo13.jpg" class="gallery-link" title="Image Info">
-                                                        <img src="img/placeholders/photos/photo13.jpg" alt="image">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- END Widget Main -->
-                                </div>
-                            </div>
-                            <!-- END Advanced Gallery Widget -->
                         </div>
                     </div>
                     <!-- END Widgets Row -->
@@ -499,7 +373,7 @@
                         Crafted with <i class="fa fa-heart text-danger"></i> by <a href="http://goo.gl/vNS3I" target="_blank">pixelcave</a>
                     </div>
                     <div class="pull-left">
-                        <span id="year-copy"></span> &copy; <a href="http://goo.gl/TDOSuC" target="_blank">ProUI 2.1</a>
+                        <span>2016</span> &copy;
                     </div>
                 </footer>
                 <!-- END Footer -->

@@ -157,6 +157,14 @@ short_ema=17
 
 	extra_data=[k_stochastic, main_ema_val, atr_val, macd_val]
 
+	begin
+		if @short_raw_data.last["high"]>@last_bought+1
+		sell(@last_bought+1)
+	end
+	rescue Exception => e
+		
+	end
+
 	# BUY
 	# TODO: add #crossed over 20 stochastic line
 	if last_close > last_open &&

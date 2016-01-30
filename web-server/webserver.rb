@@ -10,6 +10,7 @@ require 'yaml'
 
 #Dependencies
 require_relative '../trading-bots/bitfinex/bitfinex.rb'
+require_relative '../trading-bots/okcoin/okcoin_rest_client.rb'
 
 #Setup
 keys=File.read("../keys.yaml")
@@ -20,15 +21,13 @@ end
 
 #Web Connections
 get '/' do
-  erb :main
+  erb :landing
 end
 
-get '/admin' do
-  erb :admin
-end
-
-get '/test' do
-  erb :index
+get '/dashboard' do
+  puts Okcoin.order_history( 2, 1, 200)
+  @transactions=[]
+  erb :dashboard
 end
 
 post '/update-balances' do

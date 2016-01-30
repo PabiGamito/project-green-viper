@@ -40,15 +40,15 @@ require 'colorize'
 				@cny>=0.001*@sell
 
 				puts "Attempting to buy at #{@sell}".green
-				order = Okcoin.trade( "buy", @cny/@sell, @sell)
+				order = Okcoin.trade( "buy_market", @cny/@sell, @cny/@sell)
 				index = 0
 				until order["result"]
-					order = Okcoin.trade( "buy", @cny/@sell, @sell)
+					order = Okcoin.trade( "buy_market", @cny/@sell, @cny/@sell)
 					index += 1
 					break if index > 10
 				end
-				check_order_completion( order["order_id"] )
-				@logger.info "Buying at #{@sell}"
+				
+				@logger.info "Market Buying at #{@sell}"
 				@stop_loss_sell = last_close-@atr*0.5
 				# send_email("pablogamito@gmail.com", "Buying at #{@sell}")
 
@@ -64,15 +64,14 @@ require 'colorize'
 				@btc >= 0.001
 
 				puts "Attempting to sell at #{@buy}".red
-				order = Okcoin.trade( "sell", @btc, @buy)
+				order = Okcoin.trade( "sell_market", @btc, @btc)
 				index = 0
 				until order["result"]
-					order = Okcoin.trade( "sell", @btc, @buy)
+					order = Okcoin.trade( "sell_market", @btc, @btc)
 					index += 1
 					break if index > 10
 				end
-				check_order_completion(order["order_id"])
-				@logger.info "Selling at #{@buy}"
+				@logger.info "Market Selling at #{@buy}"
 				@stop_loss_buy = last_close+@atr*0.5
 				# send_email("pablogamito@gmail.com", "Selling at #{@buy}")
 				
@@ -101,16 +100,15 @@ require 'colorize'
 					@btc >= 0.001
 					
 					puts "Attempting to sell at #{@buy}".red
-					order = Okcoin.trade( "sell", @btc, @buy)
+					order = Okcoin.trade( "sell_market", @btc, @btc)
 					index = 0
 					until order["result"]
-						order = Okcoin.trade( "sell", @btc, @buy)
+						order = Okcoin.trade( "sell_market", @btc, @btc)
 						index += 1
 						break if index > 10
 					end
-					check_order_completion( order["order_id"] )
 					# send_email("pablogamito@gmail.com", "Selling at #{@buy}")
-					@logger.info "Selling at #{@buy}"
+					@logger.info "Default Stoploss Selling at #{@buy}"
 
 			# TODO: add Crossed 20 stochastic line and back up 
 				elsif last_close >= @stop_loss_buy &&
@@ -123,16 +121,15 @@ require 'colorize'
 					@cny >= 0.001*@sell
 					
 					puts "Attempting to buy at #{@sell}".green
-					order = Okcoin.trade( "buy", @cny/@sell, @sell)
+					order = Okcoin.trade( "buy_market", @cny/@sell, @cny/@sell)
 					index = 0
 					until order["result"]
-						order = Okcoin.trade( "buy", @cny/@sell, @sell)
+						order = Okcoin.trade( "buy_market", @cny/@sell, @cny/@sell)
 						index += 1
 						break if index > 10
 					end
-					check_order_completion( order["order_id"] )
 					# send_email("pablogamito@gmail.com", "Buying at #{@sell}")
-					@logger.info "Buying at #{@sell}"
+					@logger.info "Default Stoploss Buying at #{@sell}"
 
 				end
 			rescue Exception => e

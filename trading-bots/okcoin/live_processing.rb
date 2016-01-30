@@ -12,14 +12,13 @@ def check_stop_loss_sell
 		order = Okcoin.trade( "sell", @btc, @buy)
 		check_order_completion( order["order_id"] )
 		# send_email("pablogamito@gmail.com", "Selling at #{@buy}")
-		@logger.info "Selling at #{@buy}"
+		@logger.info "Live Stoploss: Selling at #{@buy}"
 
 	end
 	rescue Exception => e
 		@logger.error "#{e.backtrace}: #{e.message} (#{e.class})"
 	end
 end
-
 
 def check_order_completion(order_id)
 	#Gets the orderinfo and makes sure got data
@@ -97,6 +96,34 @@ def check_order_completion(order_id)
 		else
 
 		end
+	end
+	place_take_sell_order(amount, bought_price, atr)
+end
+
+def place_take_sell_order(amount, sell_price)
+	@logger.info "Placing Take Sell Order at #{bought_price+atr}"
+	sold=false
+	order=Okcoin.trade("sell", amount, sell_price)
+	index=0
+	until order["result"]
+		order = Okcoin.trade("sell", amount, sell_price)
+		index += 1
+		if index > 10
+			sold=true
+			break
+		end
+	end
+
+	order_id = order["order_id"].to_i
+
+	until sold
+		order_info = Okcoin.order_info( order_id )
+		if condition
+			Okcoin.cancel_order(order_id) rescue Okcoin.cancel_order(order_id)
+		else
+			sold=true
+		end
+		sleep(1)
 	end
 end
 
