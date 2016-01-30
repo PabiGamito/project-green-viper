@@ -4,7 +4,7 @@ def check_stop_loss_sell
 	begin
 	# @atr ||= 1
 	k_stochastic = stochastic(@raw_data, @stochastic_period, @stochastic_k, @stochastic_d)["k"].to_f
-	if @buy <= @stop_loss_sell-@atr*0.8 &&
+	if (@buy <= @stop_loss_sell-@atr*0.8 || @buy <= @stop_loss_sell-1) &&
 	k_stochastic > 20 &&
 	@btc >= 0.001
 						
