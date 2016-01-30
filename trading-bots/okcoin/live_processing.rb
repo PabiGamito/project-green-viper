@@ -10,8 +10,13 @@ def check_stop_loss_sell
 						
 		puts "Attempting to sell at #{@buy}".red
 		order = Okcoin.trade( "sell", @btc, @buy)
+		index = 0
+		until order["result"]
+			order = Okcoin.trade( "sell", @btc, @buy)
+			index += 1
+			break if index > 10
+		end
 		check_order_completion( order["order_id"] )
-		# send_email("pablogamito@gmail.com", "Selling at #{@buy}")
 		@logger.info "Live Stoploss: Selling at #{@buy}"
 
 	end
@@ -97,14 +102,32 @@ def check_order_completion(order_id)
 
 		end
 	end
-	place_take_sell_order(amount, bought_price, atr)
+	# place_take_sell_order(amount, bought_price, atr)
+end
+
+def cancel_all_open_orders
+	orders = Okcoin.order_info( "-1" )
+	until orders["result"]
+		orders = Okcoin.order_info( "-1" )
+	end
+	canceled_amount=0
+	until orders["orders"].count == 0
+		orders["orders"].each do |order|
+			Okcoin.cancel_order(order["order_id"]) rescue Okcoin.cancel_order(order["order_id"])
+			canceled_amount+=order["amount"]
+		end
+		orders = Okcoin.order_info( "-1" )
+	end
+
+	@logger.info "Canceled all active orders." if canceled_amount>0
+	return canceled_amount
 end
 
 def place_take_sell_order(amount, sell_price)
-	@logger.info "Placing Take Sell Order at #{bought_price+atr}"
-	sold=false
+	#Place Sell Order
 	order=Okcoin.trade("sell", amount, sell_price)
 	index=0
+	#Tries up to 10 times if order not placed
 	until order["result"]
 		order = Okcoin.trade("sell", amount, sell_price)
 		index += 1
@@ -113,18 +136,7 @@ def place_take_sell_order(amount, sell_price)
 			break
 		end
 	end
-
-	order_id = order["order_id"].to_i
-
-	until sold
-		order_info = Okcoin.order_info( order_id )
-		if condition
-			Okcoin.cancel_order(order_id) rescue Okcoin.cancel_order(order_id)
-		else
-			sold=true
-		end
-		sleep(1)
-	end
+	@logger.info "Attempted to Place Take Sell Order at #{sell_price}"
 end
 
 # Response

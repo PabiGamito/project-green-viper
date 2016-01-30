@@ -16,7 +16,7 @@ logs = Dir.entries("logs").sort.select { |file_name| /bot-log\w+.log/.match(file
 logs.count>0 ? next_id = /\d/.match(logs.last).to_s.to_i + 1 : next_id = 1
 #Creates new file to write log into
 File.new("logs/bot-log#{next_id}.log", "w") 
-@logger = Logging.logger['main_logger']
+@logger = Logging.logger['OkcoinBot']
 @logger.add_appenders \
     Logging.appenders.stdout,
     Logging.appenders.file("logs/bot-log#{next_id}.log")
@@ -106,6 +106,8 @@ require_relative "data_point_updater.rb"
 @close_ema=5
 @main_ema=160
 @short_ema=17
+
+update_data_points
 
 #Setup schedualed tasks
 scheduler.every '1s' do

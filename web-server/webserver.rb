@@ -25,9 +25,13 @@ get '/' do
 end
 
 get '/dashboard' do
-  puts Okcoin.order_history( 2, 1, 200)
-  @transactions=[]
+  # puts Okcoin.order_history( 2, 1, 200)
+  # # @transactions=[]
   erb :dashboard
+end
+
+get '/statistics' do
+  erb :statistics
 end
 
 post '/update-balances' do
@@ -63,129 +67,58 @@ post '/update-balances' do
 
 end
 
-post '/update-pairs' do
-	@btc_usd_price=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/btc_usd").read)["price"].to_f
-	price_before=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/btc_usd").read)["price_before_24h"].to_f
-	@btc_usd_change=(((@btc_usd_price-price_before)/price_before)*100).round(2)
+post '/update-assets' do
 
-	@ltc_usd_price=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/ltc_usd").read)["price"].to_f
-	price_before=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/ltc_usd").read)["price_before_24h"].to_f
-	@ltc_usd_change=(((@ltc_usd_price-price_before)/price_before)*100).round(2)
-
-	@btc_ltc_price=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/ltc_btc").read)["price"].to_f
-	price_before=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/ltc_btc").read)["price_before_24h"].to_f
-	@btc_ltc_change=(((@btc_ltc_price-price_before)/price_before)*100).round(2)
-
-	@btc_eth_price=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/eth_btc").read)["price"].to_f
-	price_before=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/eth_btc").read)["price_before_24h"].to_f
-	@btc_eth_change=(((@btc_eth_price-price_before)/price_before)*100).round(2)
-
-	return_array=[]
-	return_array<<""\
-	"<table class='table table-hover'>"\
-    "<thead>"\
-      "<tr>"\
-       	"<th style='text-align: center;'>Pair</th>"\
-        "<th style='text-align: center;'>Price</th>"\
-        "<th style='text-align: center;'>Change</th>"\
-      "</tr>"\
-    "</thead>"\
-    "<tbody style='overflow-y: scroll; height: 100px;'>"\
-      "<tr>"\
-        "<td>BTC/USD</td>"
-        if @btc_usd_change.to_f>=0
-        return_array<<""\
-        "<td style='color: green;''>#{@btc_usd_price}</td>"\
-        "<td style='color: green;'>#{@btc_usd_change}%</td>"
-        else
-        return_array<<""\
-        "<td style='color: red;'>#{@btc_usd_price}</td>"\
-        "<td style='color: red;'>#{@btc_usd_change}%</td>"
-        end
-      return_array<<""\
-      "</tr>"\
-      "<tr>"\
-        "<td>LTC/USD</td>"
-        if @ltc_usd_change.to_f>=0
-        return_array<<""\
-        "<td style='color: green;'>#{@ltc_usd_price}</td>"\
-        "<td style='color: green;'>#{@ltc_usd_change}%</td>"
-        else
-        return_array<<""\
-        "<td style='color: red;'>#{@ltc_usd_price}</td>"\
-        "<td style='color: red;'>#{@ltc_usd_change}%</td>"
-       	end
-      return_array<<""\
-      "</tr>"\
-      "<tr>"\
-        "<td>LTC/BTC</td>"
-        if @btc_ltc_change.to_f>=0
-        return_array<<""\
-        "<td style='color: green;'>#{@btc_ltc_price}</td>"\
-        "<td style='color: green;'>#{@btc_ltc_change}%</td>"
-        else
-        return_array<<""\
-        "<td style='color: red;'>#{@btc_ltc_price}</td>"\
-        "<td style='color: red;'>#{@btc_ltc_change}%</td>"
-        end
-      return_array<<""\
-      "</tr>"\
-      "<tr>"\
-        "<td>ETH/BTC</td>"
-        if @btc_eth_change.to_f>=0
-        return_array<<""\
-        "<td style='color: green;'>#{@btc_eth_price}</td>"\
-        "<td style='color: green;'>#{@btc_eth_change}%</td>"
-        else
-        return_array<<""\
-        "<td style='color: red;'>#{@btc_eth_price}</td>"\
-        "<td style='color: red;'>#{@btc_eth_change}%</td>"
-        end
-      return_array<<""\
-      "</tr>"\
-      # "<tr>"\
-    		# "<td style='color: red;'>#{@btc_eth_price}</td>"\
-      #   "<td style='color: red;'>#{@btc_eth_change}%</td>"\
-      # "</tr>"\
-    "</tbody>"\
-  "</table>"
-
-  return return_array.join(' ')
 end
 
-post '/update-updates' do
-	updates={}
-	#Bitfinex Trade History
-	bfx = Bitfinex.new("Gxt3Qa0W35fq5JWpX1ILNwca1N3eDNNZKlJf8fqYyhl", "92LSVKCcL2vFu4DSTJEbUe9ttgH1VOwxFeNHGDDea9n")
-	puts "running"
-	#Poloniex Trade History
-	JSON.parse(Poloniex.trade_history("BTC_ETH")).each do |data|
-		time_stamp=Time.parse(data["date"]).to_i
-		if data["type"]=="sell"
-			updates[time_stamp]="#{data['amount']} ETH sold at #{data['rate']} BTC each for a total of #{data['total']} BTC"
-		elsif data["type"]=="buy"
-			updates[time_stamp]="#{data['amount']} ETH bought at #{data['rate']} BTC each for a total of #{data['total']} BTC"
-		end
-	end
+post '/update-market-prices' do
+  data=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/btc_usd").read)
+  btc_usd_price=data["price"].to_f
+  btc_usd_volume=data["volume_btc"].to_f
+	price_before=data["price_before_24h"].to_f
+	btc_usd_change=(((btc_usd_price-price_before)/price_before)*100).round(2)
 
-	Hash[updates.sort.reverse]
+  data=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/btc_cny").read)
+  btc_cny_price=data["price"].to_f
+  btc_cny_volume=data["volume_btc"].to_f
+  price_before=data["price_before_24h"].to_f
+  btc_cny_change=(((btc_cny_price-price_before)/price_before)*100).round(2)
 
-	return_array=[]
+  data=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/ltc_usd").read)
+	ltc_usd_price=data["price"].to_f
+  ltc_usd_volume=data["volume_btc"].to_f
+	price_before=data["price_before_24h"].to_f
+	ltc_usd_change=(((ltc_usd_price-price_before)/price_before)*100).round(2)
 
-	updates.each do |time, message|
-		return_array<<""\
-		"<div class='desc' style='width: 100%;'>"\
-      "<div class='thumb'>"\
-        "<span class='badge bg-theme'><i class='fa fa-clock-o'></i></span>"\
-      "</div>"\
-      "<div class='details'>"\
-	      "<p><muted>#{Time.at(time)}</muted><br>"\
-	      "#{message}<br>"\
-	      "</p>"\
-      "</div>"\
-    "</div>"
-	end
+  data=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/ltc_btc").read)
+	ltc_btc_price=data["price"].to_f
+  ltc_btc_volume=data["volume_btc"].to_f
+	price_before=data["price_before_24h"].to_f
+	ltc_btc_change=(((ltc_btc_price-price_before)/price_before)*100).round(2)
 
-	return return_array.join('')
+  data=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/eth_btc").read)
+	eth_btc_price=data["price"].to_f
+  eth_btc_volume=data["volume_btc"].to_f
+	price_before=data["price_before_24h"].to_f
+	eth_btc_change=(((eth_btc_price-price_before)/price_before)*100).round(2)
+
+  data=JSON.parse(open("http://api.cryptocoincharts.info/tradingPair/eth_usdt").read)
+  eth_usd_price=data["price"].to_f
+  eth_usd_volume=data["volume_btc"].to_f
+  price_before=data["price_before_24h"].to_f
+  eth_usd_change=(((eth_usd_price-price_before)/price_before)*100).round(2)
+  eth_usd_price=eth_usd_price.round(3)
+
+  return_hash = "{'btc_usd': {'price': #{btc_usd_price}, 'volume': #{btc_usd_volume}, 'change': #{btc_usd_change}},"\
+                "'btc_cny': {'price': #{btc_cny_price}, 'volume': #{btc_cny_volume}, 'change': #{btc_cny_change}},"\
+                "'ltc_usd': {'price': #{ltc_usd_price}, 'volume': #{ltc_usd_volume}, 'change': #{ltc_usd_change}},"\
+                "'ltc_btc': {'price': #{ltc_btc_price}, 'volume': #{ltc_btc_volume}, 'change': #{ltc_btc_change}},"\
+                "'eth_btc': {'price': #{eth_btc_price}, 'volume': #{eth_btc_volume}, 'change': #{eth_btc_change}},"\
+                "'eth_usd': {'price': #{eth_usd_price}, 'volume': #{eth_usd_volume}, 'change': #{eth_usd_change}}"\
+                "}"
+
+  puts "Update Market Prices Done"
+
+  return return_hash
 
 end
