@@ -107,8 +107,8 @@ end
 
 #Get data
 require 'CSV'
-@short_raw_data = okcoin_raw_data("1m", 1*1440 )
-@short_prices = okcoin_prices("1m", 1*1440 )
+@short_raw_data = okcoin_raw_data("1m", 99*1440 )
+@short_prices = okcoin_prices("1m", 99*1440 )
 
 #Setup
 @btc = 1.0
@@ -168,8 +168,8 @@ short_ema=17
 	# BUY
 	# TODO: add #crossed over 20 stochastic line
 	if last_close > last_open &&
-		main_ema_val < last_close &&
-		short_ema_val < last_close &&
+		#main_ema_val < last_close &&
+		#short_ema_val < last_close &&
 		20 < k_stochastic &&
 		k_stochastic < 80 &&
 		macd_val > last_macd_val &&
@@ -224,8 +224,8 @@ short_ema=17
 	# TODO: add Crossed 20 stochastic line and back up 
 		elsif last_close >= @stop_loss_buy &&
 			last_close > last_open &&
-			main_ema_val < last_close && #TODO: Test with only one or the other: main_ema_val or short_ema_val
-			short_ema_val < last_close &&
+			#main_ema_val < last_close && #TODO: Test with only one or the other: main_ema_val or short_ema_val
+			#short_ema_val < last_close &&
 			20 < k_stochastic &&
 			k_stochastic < 80 &&
 			close_ema_val > open_ema_val &&

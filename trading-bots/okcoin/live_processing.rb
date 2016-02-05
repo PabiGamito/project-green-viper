@@ -18,7 +18,7 @@ def check_stop_loss_sell
 		end
 		check_order_completion( order["order_id"] )
 		@logger.info "Live Stoploss: Selling at #{@buy}"
-
+		@full_sold=true
 	end
 	rescue Exception => e
 		@logger.error "#{e.backtrace}: #{e.message} (#{e.class})"

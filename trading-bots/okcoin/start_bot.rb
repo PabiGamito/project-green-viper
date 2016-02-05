@@ -108,6 +108,7 @@ require_relative "data_point_updater.rb"
 @short_ema=17
 
 update_data_points
+@full_sold=true
 
 #Setup schedualed tasks
 scheduler.every '1s' do
