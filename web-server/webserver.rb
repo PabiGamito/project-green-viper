@@ -9,15 +9,15 @@ require 'net/http'
 require 'yaml'
 
 #Dependencies
-require_relative '../trading-bots/bitfinex/bitfinex.rb'
-require_relative '../trading-bots/okcoin/okcoin_rest_client.rb'
+# require_relative '../trading-bots/bitfinex/bitfinex.rb'
+# require_relative '../trading-bots/okcoin/okcoin_rest_client.rb'
 
 #Setup
-keys=File.read("../keys.yaml")
-Poloniex.setup do | config |
-  config.key = keys["poloniex"]["key"]
-  config.secret = keys["poloniex"]["secret"]
-end
+# keys=File.read("../keys.yaml")
+# Poloniex.setup do | config |
+#   config.key = keys["poloniex"]["key"]
+#   config.secret = keys["poloniex"]["secret"]
+# end
 
 #Web Connections
 get '/' do

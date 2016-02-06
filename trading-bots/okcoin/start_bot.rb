@@ -107,8 +107,10 @@ require_relative "data_point_updater.rb"
 @main_ema=160
 @short_ema=17
 
-update_data_points
-@full_sold=true
+until HistoricalData.last.id%2==0
+  update_data_points if HistoricalData.last.id%2==0
+  sleep(10)
+end
 
 #Setup schedualed tasks
 scheduler.every '1s' do
@@ -116,13 +118,13 @@ scheduler.every '1s' do
   @buy = @last_ticker["buy"].to_f
   @sell = @last_ticker["sell"].to_f
   @price =  @last_ticker["last"].to_f
-  check_stop_loss_sell
+  check_stop_loss_buy
 end
 
 scheduler.every '30s' do
   update_data_points
-  load 'data_processor.rb'
-  # @logger.info "running"
+  #Load main data processing scrypt to decide to buy or not.
+  load 'btc_orianted_data_processor.rb'
 end
 
 #Connect to schedualed task to run in loop forever.

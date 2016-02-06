@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <title>Pabi Bot - Welcome</title>
+
+        <meta name="description" content="ProUI Frontend is a Responsive Bootstrap Site Template created by pixelcave and added as a bonus in ProUI Admin Template package which is published on Themeforest.">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+        <!-- Stylesheets -->
+        <!-- bootstrap -->
+				<%= stylesheet_link_tag    'bootstrap.min', media: 'all', 'data-turbolinks-track' => true %>
+        <!-- Related styles of various icon packs and plugins -->
+        <%= stylesheet_link_tag    'frontend/plugins', media: 'all', 'data-turbolinks-track' => true %>
+        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+        <%= stylesheet_link_tag    'frontend/main', media: 'all', 'data-turbolinks-track' => true %>
+        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <%= stylesheet_link_tag    'frontend/themes', media: 'all', 'data-turbolinks-track' => true %>
+        <!-- END Stylesheets -->
+
+        <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) 
+        <script src="landing/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>-->
+    </head>
+    <body>
+
+    <%= yield %>
+
+<!-- Scroll to top link, initialized in landing/js/app.js - scrollToTop() -->
+        <a href="#" id="to-top"><i class="fa fa-angle-up"></i></a>
+
+        <!-- Include Jquery -->
+  			<%= javascript_include_tag 'jquery', 'data-turbolinks-track' => true%>
+
+        <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
+        <%= javascript_include_tag 'bootstrap.min', 'data-turbolinks-track' => true%>
+        <%= javascript_include_tag 'frontend/plugins', 'data-turbolinks-track' => true%>
+        <%= javascript_include_tag 'frontend/app', 'data-turbolinks-track' => true%>
+    </body>
+</html>

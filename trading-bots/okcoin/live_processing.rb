@@ -25,6 +25,30 @@ def check_stop_loss_sell
 	end
 end
 
+def check_stop_loss_buy
+	if @stop_loss + @atr*0.1 < @buy
+		save_stop_loss = @stop_loss
+		#Cancel all active orders to place stoploss buy order
+		cancel_all_open_orders
+		#Buy back into BTC
+		order = Okcoin.trade( "buy", @cny/@sell, @sell)
+		#Disable stop_loss for it not to try and buy over & over without funds.
+		@stop_loss=nil
+		#If not placed retry to place spot buy order 10 times
+		index = 0
+		until order["result"]
+			order = Okcoin.trade( "buy", @cny/@sell, @sell)
+			index += 1
+			if index > 10
+				@stop_loss=save_stop_loss
+				break
+			end
+		end
+		#Make sure order is completed properly
+		check_order_completion( order["order_id"] )
+	end
+end
+
 def check_order_completion(order_id)
 	#Gets the orderinfo and makes sure got data
 	order = Okcoin.order_info( order_id )
@@ -137,6 +161,22 @@ def place_take_sell_order(amount, sell_price)
 		end
 	end
 	@logger.info "Attempted to Place Take Sell Order at #{sell_price}"
+end
+
+def place_take_buy_order(amount, buy_price)
+	#Place Sell Order
+	order=Okcoin.trade("buy", amount, buy_price)
+	index=0
+	#Tries up to 10 times if order not placed
+	until order["result"]
+		order = Okcoin.trade("buy", amount, buy_price)
+		index += 1
+		if index > 10
+			sold=true
+			break
+		end
+	end
+	# @logger.info "Attempted to Place Take Sell Order at #{buy_price}"
 end
 
 # Response
