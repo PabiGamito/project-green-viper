@@ -26,7 +26,8 @@ def check_stop_loss_sell
 end
 
 def check_stop_loss_buy
-	if @stop_loss + @atr*0.1 < @buy
+	puts "Checking Stoploss"
+	if @stop_loss < @buy
 		save_stop_loss = @stop_loss
 		#Cancel all active orders to place stoploss buy order
 		cancel_all_open_orders

@@ -1,51 +1,99 @@
-<div class="page-header">
-  <h1><%=t ".title", default: "Sign Up" %></h1>
-</div>
+        <!-- Login Full Background -->
+        <!-- For best results use an image with a resolution of 1280x1280 pixels (prefer a blurred image for smaller file size) -->
+        <img src="img" alt="Login Full Background" class="full-bg animation-pulseSlow">
+        <!-- END Login Full Background -->
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-horizontal form-user"}) do |f| %>
-  <%= devise_error_messages! %>
+        <!-- Login Container -->
+        <div id="login-container" class="animation-fadeIn">
+            <!-- Login Title -->
+            <div class="login-title text-center">
+                <h1><i class="gi gi-flash"></i> <strong>PabiBot</strong><br><small>Please <strong>Login</strong> or <strong>Register</strong></small></h1>
+            </div>
+            <!-- END Login Title -->
 
-  
-  <div class="form-group">
-    <%= f.label :username, class: "control-label col-md-4" %>
-    <div class="col-md-8">
-      <%= f.text_field :username, class: "text-field form-control", html: {spellcheck: "false"} %>
-    </div>
-  </div>
-  
+            <!-- Login Block -->
+            <div class="block push-bit" style="height: 275px;">
+                <!-- Register Form -->
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: "form-register",class: "orm-horizontal form-bordered form-control-borderless"}) do |f| %>
+                <%= devise_error_messages! %>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-user"></i></span>
+                                <%= f.text_field :username, class: "text-field form-control input-lg", placeholder: "Username", html: {spellcheck: "false"} %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                                <%= f.email_field :email, class: "text-field form-control input-lg", placeholder: "Email", html: {spellcheck: "false"} %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                                <%= f.password_field :password, class: "text-field form-control input-lg", placeholder: "Password",html: {autocomplete: "off"} %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                                <%= f.password_field :password_confirmation, class: "text-field form-control input-lg", placeholder: "Verify Password", html: {autocomplete: "off"} %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-actions">
+                        <div class="col-xs-6">
+                            <a href="#modal-terms" data-toggle="modal" class="register-terms">Terms</a>
+                            <label class="switch switch-primary" data-toggle="tooltip" title="Agree to the terms">
+                                <input type="checkbox" id="register-terms" name="register-terms">
+                                <span></span>
+                            </label>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <%= f.submit "Sign Up", class: "btn btn-sm btn-success" %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12 text-center">
+                            <small>Do you have an account?</small> <a href="/login"><small>Login</small></a>
+                        </div>
+                    </div>
+                <% end %>
+                <!-- END Register Form -->
+            </div>
+            <!-- END Login Block -->
+        </div>
+        <!-- END Login Container -->
 
-  <div class="form-group">
-    <%= f.label :email, class: "control-label col-md-4" %>
-    <div class="col-md-8">
-      <%= f.email_field :email, class: "text-field form-control", html: {spellcheck: "false"} %>
-    </div>
-  </div>
+        <!-- Modal Terms -->
+        <div id="modal-terms" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Terms &amp; Conditions</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Title</h4>
+                        <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h4>Title</h4>
+                        <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h4>Title</h4>
+                        <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>                                                                                                                          
     
-  <div class="form-group">
-    <%= f.label :password, class: "control-label col-md-4" %>
-    <div class="col-md-8">
-      <%= f.password_field :password, class: "text-field form-control", html: {autocomplete: "off"} %>
-    </div>
-  </div>
-     
-  <div class="form-group">
-    <%= f.label :password_confirmation, "Password Confirmation", class: "control-label col-md-4" %>
-    <div class="col-md-8">
-      <%= f.password_field :password_confirmation, class: "text-field form-control", html: {autocomplete: "off"} %>
-    </div>
-  </div>
-     
-  <div class="form-group">
-    <div class="col-md-offset-4 col-md-8">
-      <%= f.submit "Sign Up", class: "btn btn-primary" %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-md-offset-4 col-md-8">
-      <%= render "devise/shared/links" %>
-    </div>
-  </div>
-
-<% end %>
+    
 

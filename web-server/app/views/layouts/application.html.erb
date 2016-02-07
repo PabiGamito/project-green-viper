@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pandora</title>
+  <title>PabiBot</title>
   <%= stylesheet_link_tag    'bootstrap.min', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'backend/plugins', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'backend/main', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'backend/themes', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'bootstrap.min', 'data-turbolinks-track' => true%>
+  <%= javascript_include_tag 'jquery', 'data-turbolinks-track' => true%>
+  <!-- 
+  <script src="js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
+ -->
   <%= csrf_meta_tags %>
 <meta name="viewport" content="width=device-width, initial-scale=1"/><!-- Prelang: Analytics / Google Analytics -->
     <%= analytics_init if Rails.env.production? or Rails.env.development? %></head>
 <body>
-<%= render partial: "elements/navbar" %>
-
 
 <%= yield %>
-
 
 </body>
 </html>

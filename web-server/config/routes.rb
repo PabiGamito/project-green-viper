@@ -60,6 +60,10 @@ Rails.application.routes.draw do
   #   end
   
   get "dashboard" => "dashboard#index"
+
+  get "update-market-prices" => "dashboard#update_markets"
+  get "bitcoin-ticker" => "dashboard#bitcoin_ticker"
+  get "bitcoin-price-history" => "dashboard#bitcoin_price_history"
   
   #->Prelang (user_login:devise/stylized_paths)
   devise_scope :user do

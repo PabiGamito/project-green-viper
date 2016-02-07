@@ -13,24 +13,9 @@
 
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
 
-        <!-- Stylesheets -->
-        <!-- Bootstrap is included in its original form, unaltered -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-
-        <!-- Related styles of various icon packs and plugins -->
-        <link rel="stylesheet" href="css/plugins.css">
-
-        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
-        <link rel="stylesheet" href="css/main.css">
-
-        <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
-
-        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
-        <link rel="stylesheet" href="css/themes.css">
+        
         <!-- END Stylesheets -->
 
-        <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
-        <script src="js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
     </head>
     <!-- In the PHP version you can set the following options from inc/config file -->
     <!--
@@ -176,10 +161,10 @@
                                             <h3 class="remove-margin-bottom">+ <strong>4.21%</strong><br><small>Assets Value</small></h3>
                                         </div>
                                         <div class="col-xs-4">
-                                            <a href="javascript:void(0)" class="widget-icon themed-background-fire">
+                                            <a id="weekly-btc-icon" href="javascript:void(0)" class="widget-icon">
                                                 <i class="fa fa-bitcoin"></i>
                                             </a>
-                                            <h3 class="remove-margin-bottom">- <strong>3.56%</strong><br><small>Bitcoin Price</small></h3>
+                                            <h3 class="remove-margin-bottom"><span id="weekly-change"></span><br><small>Bitcoin Price</small></h3>
                                         </div>
                                         <div class="col-xs-4">
                                             <a href="javascript:void(0)" class="widget-icon themed-background-flatie">
@@ -206,10 +191,10 @@
                                             <h3 class="remove-margin-bottom">+ <strong>26.4%</strong><br><small>Assets Value</small></h3>
                                         </div>
                                         <div class="col-xs-4">
-                                            <a href="javascript:void(0)" class="widget-icon themed-background-spring">
+                                            <a id="monthly-btc-icon" href="javascript:void(0)" class="widget-icon">
                                                 <i class="fa fa-bitcoin"></i>
                                             </a>
-                                            <h3 class="remove-margin-bottom">+ <strong>1.89%</strong><br><small>Bitcoin Price</small></h3>
+                                            <h3 class="remove-margin-bottom"><span id="monthly-change"></span><br><small>Bitcoin Price</small></h3>
                                         </div>
                                         <div class="col-xs-4">
                                             <a href="javascript:void(0)" class="widget-icon themed-background-flatie">
@@ -295,7 +280,7 @@
                                                     <th>Market</th>
                                                     <th>Price</th>
                                                     <th>Volume <small>(BTC)</small></th>
-                                                    <th>Change</th>
+                                                    <th>Change <small>24h</small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="market-table-body">
@@ -506,84 +491,82 @@
         <!-- Remember to include excanvas for IE8 chart support -->
         <!--[if IE 8]><script src="js/helpers/excanvas.min.js"></script><![endif]-->
 
-        <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
-
-        <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/app.js"></script>
-
-        <!-- Google Maps API + Gmaps Plugin, must be loaded in the page you would like to use maps (Remove 'http:' if you have SSL) -->
-        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        <script src="js/helpers/gmaps.min.js"></script>
-
         <!-- Load and execute javascript code used only in this page -->
-        <script src="js/pages/index.js"></script>
-        <script>$(function(){ Index.init(); });</script>
         <script type="text/javascript">
-            $.post("/update-market-prices", { salutation: "Howdy", name: "Friend" },
-                function(result) {
-                result = "hash = " + result + ";";
-                eval(result);
-                $('#btc-usd .price').html(hash.btc_usd.price);
-                $('#btc-usd .volume').html(hash.btc_usd.volume);
-                if (hash.btc_usd.change>=0) {
-                    $('#btc-usd .change').html("+ <strong>" + hash.btc_usd.change + "</strong>%");
+            $.get("bitcoin-price-history", function(result) {
+                if (result.week_variation>=0) {
+                    $("#weekly-change").html("+ <strong>"+result.week_variation + "%</strong>");
+                    $("#weekly-btc-icon").addClass("themed-background-spring");
+                } else { 
+                    $("#weekly-change").html("- <strong>"+Math.abs(result.week_variation) + "%</strong>");
+                    $("#weekly-btc-icon").addClass("themed-background-fire");
+                }
+                if (result.month_variation>=0) {
+                    $("#monthly-change").html("+ <strong>"+result.month_variation + "%</strong>");
+                    $("#monthly-btc-icon").addClass("themed-background-spring");
+                } else { 
+                    $("#monthly-change").html("- <strong>"+Math.abs(result.month_variation) + "%</strong>");
+                    $("#monthly-btc-icon").addClass("themed-background-fire");
+                }
+            });
+            $.get("update-market-prices", function(result) {
+                $('#btc-usd .price').html(result.btc_usd.price);
+                $('#btc-usd .volume').html(result.btc_usd.volume);
+                if (result.btc_usd.change>=0) {
+                    $('#btc-usd .change').html("+ <strong>" + result.btc_usd.change + "</strong>%");
                     $('#btc-usd .change').css('color', 'green');
                 } else { 
-                    $('#btc-usd .change').html("- <strong>" + Math.abs(hash.btc_usd.change) + "</strong>%");
+                    $('#btc-usd .change').html("- <strong>" + Math.abs(result.btc_usd.change) + "</strong>%");
                     $('#btc-usd .change').css('color', 'red');
                 }
 
-                $('#btc-cny .price').html(hash.btc_cny.price);
-                $('#btc-cny .volume').html(hash.btc_cny.volume);
-                if (hash.btc_cny.change>=0) {
-                    $('#btc-cny .change').html("+ <strong>" + hash.btc_cny.change + "</strong>%");
+                $('#btc-cny .price').html(result.btc_cny.price);
+                $('#btc-cny .volume').html(result.btc_cny.volume);
+                if (result.btc_cny.change>=0) {
+                    $('#btc-cny .change').html("+ <strong>" + result.btc_cny.change + "</strong>%");
                     $('#btc-cny .change').css('color', 'green');
                 } else { 
-                    $('#btc-cny .change').html("- <strong>" + Math.abs(hash.btc_cny.change) + "</strong>%");
+                    $('#btc-cny .change').html("- <strong>" + Math.abs(result.btc_cny.change) + "</strong>%");
                     $('#btc-cny .change').css('color', 'red');
                 }
 
-                $('#ltc-usd .price').html(hash.ltc_usd.price);
-                $('#ltc-usd .volume').html(hash.ltc_usd.volume);
-                if (hash.ltc_usd.change>=0) {
-                    $('#ltc-usd .change').html("+ <strong>" + hash.ltc_usd.change + "</strong>%");
+                $('#ltc-usd .price').html(result.ltc_usd.price);
+                $('#ltc-usd .volume').html(result.ltc_usd.volume);
+                if (result.ltc_usd.change>=0) {
+                    $('#ltc-usd .change').html("+ <strong>" + result.ltc_usd.change + "</strong>%");
                     $('#ltc-usd .change').css('color', 'green');
                 } else { 
-                    $('#ltc-usd .change').html("- <strong>" + Math.abs(hash.ltc_usd.change) + "</strong>%");
+                    $('#ltc-usd .change').html("- <strong>" + Math.abs(result.ltc_usd.change) + "</strong>%");
                     $('#ltc-usd .change').css('color', 'red');
                 }
 
-                $('#ltc-btc .price').html(hash.ltc_btc.price);
-                $('#ltc-btc .volume').html(hash.ltc_btc.volume);
-                if (hash.ltc_btc.change>=0) {
-                    $('#ltc-btc .change').html("+ <strong>" + hash.ltc_btc.change + "</strong>%");
+                $('#ltc-btc .price').html(result.ltc_btc.price);
+                $('#ltc-btc .volume').html(result.ltc_btc.volume);
+                if (result.ltc_btc.change>=0) {
+                    $('#ltc-btc .change').html("+ <strong>" + result.ltc_btc.change + "</strong>%");
                     $('#ltc-btc .change').css('color', 'green');
                 } else { 
-                    $('#ltc-btc .change').html("- <strong>" + Math.abs(hash.ltc_btc.change) + "</strong>%");
+                    $('#ltc-btc .change').html("- <strong>" + Math.abs(result.ltc_btc.change) + "</strong>%");
                     $('#ltc-btc .change').css('color', 'red');
                 }
 
-                $('#eth-btc .price').html(hash.eth_btc.price);
-                $('#eth-btc .volume').html(hash.eth_btc.volume);
-                if (hash.eth_btc.change>=0) {
-                    $('#eth-btc .change').html("+ <strong>" + hash.eth_btc.change + "</strong>%");
+                $('#eth-btc .price').html(result.eth_btc.price);
+                $('#eth-btc .volume').html(result.eth_btc.volume);
+                if (result.eth_btc.change>=0) {
+                    $('#eth-btc .change').html("+ <strong>" + result.eth_btc.change + "</strong>%");
                     $('#eth-btc .change').css('color', 'green');
                 } else { 
-                    $('#eth-btc .change').html("- <strong>" + Math.abs(hash.eth_btc.change) + "</strong>%");
+                    $('#eth-btc .change').html("- <strong>" + Math.abs(result.eth_btc.change) + "</strong>%");
                     $('#eth-btc .change').css('color', 'red');
                 }
 
-                $('#eth-usd .price').html(hash.eth_usd.price);
-                $('#eth-usd .volume').html(hash.eth_usd.volume);
-                if (hash.eth_usd.change>=0) {
-                    $('#eth-usd .change').html("+ <strong>" + hash.eth_usd.change + "</strong>%");
+                $('#eth-usd .price').html(result.eth_usd.price);
+                $('#eth-usd .volume').html(result.eth_usd.volume);
+                if (result.eth_usd.change>=0) {
+                    $('#eth-usd .change').html("+ <strong>" + result.eth_usd.change + "</strong>%");
                     $('#eth-usd .change').css('color', 'green');
                 } else { 
-                    $('#eth-usd .change').html("- <strong>" + Math.abs(hash.eth_usd.change) + "</strong>%");
+                    $('#eth-usd .change').html("- <strong>" + Math.abs(result.eth_usd.change) + "</strong>%");
                     $('#eth-usd .change').css('color', 'red');
                 }
 

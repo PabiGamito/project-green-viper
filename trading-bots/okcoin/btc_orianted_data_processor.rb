@@ -65,12 +65,13 @@ ActiveRecord::Base.connection_pool.with_connection do #Fixed too many connection
 
 		end
 
+		#UPDATE STOP-LOSS
+		if @stop_loss > last_high
+			@stop_loss = last_high
+		end
+
 		#CHECK FOR EXISTING STOP-LOSS
 		if @stop_loss!=nil
-			#UPDATE STOP-LOSS
-			if @stop_loss > last_high
-				@stop_loss = last_high
-			end
 
 			#CHECK STOP-LOSS ACTIVATION
 			if @stop_loss < last_close || @stop_loss < @sell

@@ -4,3 +4,4 @@
 - IMPORTANT: Before taking public funds re-read through all code to make sure nothing might fuck up.
 
 #Web Server
+- Custom error pages
